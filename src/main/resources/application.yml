@@ -1,0 +1,46 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+     hibernate:
+       ddl-auto: update
+     show-sql: true
+
+---
+#开发环境配置
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://114.55.183.34:3306/xuexindb_dev?useUnicode=true&amp;characterEncoding=utf-8&allowMultiQueries=true
+    username: xx_localdev
+    password: djdkre3jr[1320j
+
+server:
+  port: 8080
+
+---
+#测试环境配置
+spring:
+  profiles: test
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/testdb
+      username: root
+      password: 123456
+
+server:
+  port: 8081
+
+---
+#生产环境配置
+spring:
+  profiles: pro
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/prodb
+      username: root
+      password: 123456
+
+server:
+  port: 8082

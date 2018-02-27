@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="zhiku:Exploaded">
+    <output-path>$PROJECT_DIR$/out/artifacts/zhiku_Exploaded</output-path>
+    <root id="root" />
+  </artifact>
+</component>
