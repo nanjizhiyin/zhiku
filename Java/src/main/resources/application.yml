@@ -12,12 +12,15 @@ spring:
   profiles: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://114.55.183.34:3306/xuexindb_dev?useUnicode=true&amp;characterEncoding=utf-8&allowMultiQueries=true
-    username: xx_localdev
-    password: djdkre3jr[1320j
+    url: jdbc:mysql://127.0.0.1:3306/xpfirst?useUnicode=true&amp;characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: root
 
 server:
   port: 8080
+##指向mapper的xml文件位置
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
 
 ---
 #测试环境配置
