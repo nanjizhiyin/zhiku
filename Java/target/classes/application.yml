@@ -6,18 +6,19 @@ spring:
        ddl-auto: update
      show-sql: true
 
+
 ---
 #开发环境配置
 spring:
   profiles: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://114.55.183.34:3306/xuexindb_dev?useUnicode=true&amp;characterEncoding=utf-8&allowMultiQueries=true
-    username: xx_localdev
-    password: djdkre3jr[1320j
+    url: jdbc:mysql://127.0.0.1:3306/xpfirst?useUnicode=true&amp;characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: root
 
 server:
-  port: 8080
+  port: 8088
 
 ---
 #测试环境配置

@@ -6,6 +6,7 @@ spring:
        ddl-auto: update
      show-sql: true
 
+
 ---
 #开发环境配置
 spring:
@@ -17,10 +18,7 @@ spring:
     password: root
 
 server:
-  port: 8080
-##指向mapper的xml文件位置
-mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
+  port: 8088
 
 ---
 #测试环境配置
