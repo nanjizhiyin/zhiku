@@ -90,10 +90,23 @@
       isEffective = #{isEffective,jdbcType=INTEGER}
     where userID = #{userID,jdbcType=BIGINT}
   </update>
-  <select id="selectByUsernameAndPassword" resultMap="BaseResultMap" parameterType="com.xpfirst.model.XfUser" >
+  <select id="selectByUsername" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from xf_user
-    where username = #{username} AND password = #{password}
+    where username = #{username}
+    <if test="isEffective != null" >
+      AND isEffective = #{isEffective}
+    </if>
+    LIMIT 1
+  </select>
+  <select id="selectByUsernameAndPassword" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from xf_user
+    where isEffective = 1
+    AND username = #{username}
+    AND password = #{password}
+    LIMIT 1
   </select>
 </mapper>

@@ -35,17 +35,30 @@ public class UserController {
     public ResultBean register(@RequestParam(required = true) String username,
                                @RequestParam(required = true) String password) {
         try{
+            if (username.length() == 0){
+                log.info("====GJD===用户名不能为空");
+                return new ResultError("xf-1002","用户名不能为空");
+            }
+            if (password.length() == 0){
+                log.info("====GJD===密码不能为空");
+                return new ResultError("xf-1003","密码不能为空");
+            }
+            XfUser tmpUser = userService.selectByUsername(username,null);
+            if (tmpUser != null){
+                log.info("====GJD===用户名已经存在");
+                return new ResultError("xf-1001","用户名已经存在");
+            }
             XfUser user = new XfUser();
             Date nowDate = new Date();
             user.setUsername(username);
             user.setPassword(password);
             user.setIsEffective(1);
             user.setCreateDate(nowDate);
-            userService.addUser(user);
+            userService.registerUser(user);
             return new ResultSuccess("创建成功");
         }
         catch (Exception e){
-            log.info("====错误==="+e.toString());
+            log.info("====GJD==="+e.toString());
             return new ResultError("xf-0001",e.toString());
         }
     }
@@ -60,7 +73,19 @@ public class UserController {
     public ResultBean login(@RequestParam(required = true) String username,
                                @RequestParam(required = true) String password) {
         try{
-            XfUser user = userService.loginByUsernameAndPassword(username,password);
+            if (username.length() == 0){
+                log.info("====GJD===用户名不能为空");
+                return new ResultError("xf-1002","用户名不能为空");
+            }
+            if (password.length() == 0){
+                log.info("====GJD===密码不能为空");
+                return new ResultError("xf-1003","密码不能为空");
+            }
+            XfUser user = userService.selectByUsernameAndPassword(username,password);
+            if (user == null){
+                log.info("====GJD===用户不存在");
+                return new ResultError("xf-1001","用户不存在");
+            }
             return new ResultSuccess(user);
         }
         catch (Exception e){

@@ -24,10 +24,22 @@ public class UserServiceImpl implements UserService{
      * @Param: 用户资料
      * @Return:
      */
-    public void addUser(XfUser user){
+    public void registerUser(XfUser user){
         xfUserMapper.insertSelective(user);
     }
 
+
+    /**
+     * @Author: Gaojindan
+     * @Create: 2018/3/1 下午3:41
+     * @Des: 通过账号和密码读取一个人的信息
+     * @Param: username:账号
+     * @Return: isEffective:有效状态
+     * @Return: 用户基础资料
+     */
+    public XfUser selectByUsername(String username,Integer isEffective){
+        return xfUserMapper.selectByUsername(username,isEffective);
+    }
     /**
      * @Author: Gaojindan
      * @Create: 2018/3/1 下午3:41
@@ -36,7 +48,7 @@ public class UserServiceImpl implements UserService{
      * @Return: password:密码
      * @Return: 用户基础资料
      */
-    public XfUser loginByUsernameAndPassword(String username,String password){
+    public XfUser selectByUsernameAndPassword(String username,String password){
         return xfUserMapper.selectByUsernameAndPassword(username,password);
     }
 }
