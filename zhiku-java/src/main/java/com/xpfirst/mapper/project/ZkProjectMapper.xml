@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xpfirst.mapper.project.ZkProjectMapper" >
+
+    <sql id="Base_Column_List" >
+        projectID, projectName, createUserID, createDate, isEffective
+    </sql>
+
+    <select id="selectListByCreateUserID" resultType="com.xpfirst.model.ZkProject" >
+        select
+        <include refid="Base_Column_List" />
+        from xf_user
+        where isEffective = 1
+        AND createUserID = #{createUserID}
+        LIMIT stateIndex,pageSize
+    </select>
+</mapper>
