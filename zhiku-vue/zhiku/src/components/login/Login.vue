@@ -3,11 +3,11 @@
     <button @click="goIndex">智库</button>
     <h1>{{msg}}</h1>
     <div>
-    <label>用户名: </label><input id="username" />
+    <label>用户名: </label><input id="username" value="111111"/>
     </div>
     <br />
     <div>
-    <label>密  码: </label><input id="password" />
+    <label>密  码: </label><input id="password" value="111111"/>
     </div>
     <br />
     <button @click="goLogin">登录</button>
@@ -53,7 +53,8 @@ export default {
           // 处理反馈结果
           var errorcode = data['errorcode']
           if (errorcode === '0') {
-            alert('登录成功')
+            console.log('登录成功')
+            router.push('/projectlist')
           } else {
             var errormsg = data['errormsg']
             alert('错误: ' + errormsg)

@@ -4,11 +4,15 @@ import com.xpfirst.model.XfPermission;
 import com.xpfirst.model.XfRole;
 import com.xpfirst.model.XfUser;
 import com.xpfirst.service.user.UserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.InvalidSessionException;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 
 import javax.annotation.Resource;
@@ -29,22 +33,25 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
             throws AuthenticationException {
+
+        //实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的
         //获取用户的输入的账号.
         String username = (String) token.getPrincipal();
         XfUser userInfo = userService.selectByUsername(username,null);
         if (userInfo == null) {
-            return null;
+            throw new AuthenticationException("不存在");
         }
         if (userInfo.getIsEffective() == 0) { //账户冻结
-            throw new LockedAccountException();
+            throw new AuthenticationException("账户冻结");
         }
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                userInfo, //用户名
-                userInfo.getPassword(), //密码
-                ByteSource.Util.bytes(userInfo.getState()),//salt=username+salt
-                getName()  //realm name
-        );
-        return authenticationInfo;
+        AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
+                userInfo.getUsername(),
+                userInfo.getPassword(),
+                this.getName());
+        //保存用户ID
+        SessionManager.setSession(SessionManager.currentUser, userInfo.getUsername());
+
+        return authcInfo;
     }
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

@@ -6,6 +6,10 @@ import com.xpfirst.model.result.ResultBean;
 import com.xpfirst.model.result.ResultError;
 import com.xpfirst.model.result.ResultSuccess;
 import com.xpfirst.service.user.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,16 +85,27 @@ public class UserController {
                 log.info("====GJD===密码不能为空");
                 return new ResultError("xf-1003","密码不能为空");
             }
-            XfUser user = userService.selectByUsernameAndPassword(username,password);
-            if (user == null){
-                log.info("====GJD===用户不存在");
-                return new ResultError("xf-1001","用户不存在");
+            try {
+                String captcha = "yanzhengma";
+                UsernamePasswordToken token = new UsernamePasswordToken(username, password, captcha);
+                Subject currentUser = SecurityUtils.getSubject();
+                currentUser.login(token);
+                SecurityUtils.getSubject().login(token);
+                return new ResultSuccess(token.getUsername());
+
+            } catch (AuthenticationException e){
+                log.info("====GJD===认证失败");
+                return new ResultError("xf-1001","认证失败");
             }
-            return new ResultSuccess(user);
         }
         catch (Exception e){
             log.info("====错误==="+e.toString());
             return new ResultError("xf-0001",e.toString());
         }
+    }
+    @RequestMapping("logout")
+    public ResultBean logout(){
+        SecurityUtils.getSubject().logout();
+        return new ResultError("xf-1002","退出成功");
     }
 }

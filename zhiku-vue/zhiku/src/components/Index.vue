@@ -6,12 +6,14 @@
       <button @click="goLogin">登录</button>
       <button @click="goReister">注册</button>
       <button @click="projectList">项目列表</button>
+      <button @click="goLogout">退出</button>
   </div>
   </div>
 </template>
 
 <script>
 import router from './../router'
+import $ from 'jquery'
 export default {
   name: 'Index',
   data () {
@@ -32,6 +34,19 @@ export default {
     // 项目列表
     projectList: function () {
       router.push('/projectlist')
+    },
+    // 退出
+    goLogout: function () {
+      $.ajax({
+        url: 'http://127.0.0.1:8088/user/logout',
+        async: false, // 默认为true 异步
+        error: function (e) {
+          alert('出错了111:' + e)
+        },
+        success: function (data) {
+          router.push('/')
+        }
+      })
     }
   }
 }

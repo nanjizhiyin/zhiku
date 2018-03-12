@@ -9,9 +9,9 @@
     <select id="selectListByCreateUserID" resultType="com.xpfirst.model.ZkProject" >
         select
         <include refid="Base_Column_List" />
-        from xf_user
+        from zk_project
         where isEffective = 1
         AND createUserID = #{createUserID}
-        LIMIT stateIndex,pageSize
+        LIMIT #{stateIndex},#{pageSize}
     </select>
 </mapper>
