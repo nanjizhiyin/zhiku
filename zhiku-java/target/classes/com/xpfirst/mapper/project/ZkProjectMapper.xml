@@ -3,15 +3,22 @@
 <mapper namespace="com.xpfirst.mapper.project.ZkProjectMapper" >
 
     <sql id="Base_Column_List" >
-        projectID, projectName, createUserID, createDate, isEffective
+        projectID, projectName, createUserID, createDate, state
     </sql>
 
     <select id="selectListByCreateUserID" resultType="com.xpfirst.model.ZkProject" >
         select
         <include refid="Base_Column_List" />
         from zk_project
-        where isEffective = 1
+        where state = 1
         AND createUserID = #{createUserID}
         LIMIT #{stateIndex},#{pageSize}
+    </select>
+    <select id="selectInfoByProjectID" resultType="com.xpfirst.model.ZkProject" >
+        select
+        <include refid="Base_Column_List" />
+        from zk_project
+        where state = 1
+        AND projectID = #{projectID}
     </select>
 </mapper>

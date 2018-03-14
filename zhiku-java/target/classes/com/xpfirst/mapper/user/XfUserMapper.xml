@@ -3,7 +3,7 @@
 <mapper namespace="com.xpfirst.mapper.user.XfUserMapper" >
 
   <sql id="Base_Column_List" >
-    userID, username, password, createDate, isEffective
+    userID, username, password, createDate, state
   </sql>
   <select id="selectByPrimaryKey" resultType="com.xpfirst.model.XfUser" parameterType="java.lang.Long" >
     select 
@@ -17,9 +17,9 @@
   </delete>
   <insert id="insert" parameterType="com.xpfirst.model.XfUser" >
     insert into xf_user (userID, username, password,
-      createDate, isEffective)
+      createDate, state)
     values (#{userID,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{createDate,jdbcType=TIMESTAMP}, #{isEffective,jdbcType=INTEGER})
+      #{createDate,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.xpfirst.model.XfUser" >
     insert into xf_user
@@ -36,8 +36,8 @@
       <if test="createDate != null" >
         createDate,
       </if>
-      <if test="isEffective != null" >
-        isEffective,
+      <if test="state != null" >
+        state,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -53,8 +53,8 @@
       <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="isEffective != null" >
-        #{isEffective,jdbcType=INTEGER},
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -70,8 +70,8 @@
       <if test="createDate != null" >
         createDate = #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="isEffective != null" >
-        isEffective = #{isEffective,jdbcType=INTEGER},
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
       </if>
     </set>
     where userID = #{userID,jdbcType=BIGINT}
@@ -81,7 +81,7 @@
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP},
-      isEffective = #{isEffective,jdbcType=INTEGER}
+      state = #{state,jdbcType=INTEGER}
     where userID = #{userID,jdbcType=BIGINT}
   </update>
   <select id="selectByUsername" resultType="com.xpfirst.model.XfUser" >
@@ -89,8 +89,8 @@
     <include refid="Base_Column_List" />
     from xf_user
     where username = #{username}
-    <if test="isEffective != null" >
-      AND isEffective = #{isEffective}
+    <if test="state != null" >
+      AND state = #{state}
     </if>
     LIMIT 1
   </select>
@@ -98,7 +98,7 @@
     select
     <include refid="Base_Column_List" />
     from xf_user
-    where isEffective = 1
+    where state = 1
     AND username = #{username}
     AND password = #{password}
     LIMIT 1
