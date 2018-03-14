@@ -25,10 +25,10 @@ public interface UserService {
      * @Create: 2018/3/1 下午3:41
      * @Des: 通过账号和密码读取一个人的信息
      * @Param: username:账号
-     * @Return: isEffective:有效状态
+     * @Return: state:有效状态
      * @Return: 用户基础资料
      */
-    public XfUser selectByUsername(String username,Integer isEffective);
+    public XfUser selectByUsername(String username,Integer state);
 
     /**
      * @Author: Gaojindan

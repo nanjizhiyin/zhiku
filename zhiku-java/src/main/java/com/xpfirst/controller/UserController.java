@@ -56,7 +56,7 @@ public class UserController {
             Date nowDate = new Date();
             user.setUsername(username);
             user.setPassword(password);
-            user.setIsEffective(1);
+            user.setState(1);
             user.setCreateDate(nowDate);
             userService.registerUser(user);
             return new ResultSuccess("创建成功");

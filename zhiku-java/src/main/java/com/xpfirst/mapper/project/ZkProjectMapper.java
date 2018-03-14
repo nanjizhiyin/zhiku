@@ -27,4 +27,13 @@ public interface ZkProjectMapper {
     public List<ZkProject> selectListByCreateUserID(@Param("createUserID") String createUserID,
                                              @Param("stateIndex") Integer stateIndex,
                                              @Param("pageSize") Integer pageSize);
+
+    /**
+     * @Author: Gaojindan
+     * @Create: 2018/3/13 下午4:44
+     * @Des: 获取一个项目的详情
+     * @Param: projectID: 项目ID
+     * @Return: 项目资料
+     */
+    public ZkProject selectInfoByProjectID(@Param("projectID") Long projectID);
 }

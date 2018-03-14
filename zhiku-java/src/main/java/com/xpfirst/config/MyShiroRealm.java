@@ -41,7 +41,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         if (userInfo == null) {
             throw new AuthenticationException("不存在");
         }
-        if (userInfo.getIsEffective() == 0) { //账户冻结
+        if (userInfo.getState() == 0) { //账户冻结
             throw new AuthenticationException("账户冻结");
         }
         AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(

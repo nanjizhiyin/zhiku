@@ -7,6 +7,7 @@ import XPFirst from '@/components/first/XPFirst'
 import Register from '@/components/register/Register'
 import Login from '@/components/login/Login'
 import ProjectList from '@/components/project/ProjectList'
+import ProjectInfo from '@/components/project/ProjectInfo'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,10 @@ export default new VueRouter({
     {
       path: '/projectlist',
       component: ProjectList
+    },
+    {
+      path: '/projectInfo/:projectID',
+      component: ProjectInfo
     },
     {
       path: '/first',

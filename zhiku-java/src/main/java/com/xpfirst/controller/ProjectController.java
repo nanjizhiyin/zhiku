@@ -60,4 +60,23 @@ public class ProjectController {
             return new ResultError("xf-0001",e.toString());
         }
     }
+    /**
+    * @Author: Gaojindan
+    * @Create: 2018/3/13 下午4:44
+    * @Des: 获取一个项目的详情
+    * @Param: projectID: 项目ID
+    * @Return:
+    */
+    @RequestMapping(value = "info")
+    public ResultBean projectinfo(@RequestParam(required = true) Long projectID) {
+        try{
+            String userID = "111111";
+            ZkProject zkProject = zkProjectService.selectInfoByProjectID(projectID);
+            return new ResultSuccess(zkProject);
+        }
+        catch (Exception e){
+            log.info("====GJD==="+e.toString());
+            return new ResultError("xf-0001",e.toString());
+        }
+    }
 }

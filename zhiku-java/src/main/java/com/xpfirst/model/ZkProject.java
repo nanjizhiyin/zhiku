@@ -15,7 +15,7 @@ public class ZkProject implements Serializable {
     private String projectName; //创建者的ID
     private Integer createUserID; //创建者的ID
     private Date createDate; //创建时间
-    private Integer isEffective; //是否有效1:有效 0:无效
+    private Integer state; //是否有效1:有效 0:无效
 
     public Long getProjectID() {
         return projectID;
@@ -49,11 +49,11 @@ public class ZkProject implements Serializable {
         this.createDate = createDate;
     }
 
-    public Integer getIsEffective() {
-        return isEffective;
+    public Integer getState() {
+        return state;
     }
 
-    public void setIsEffective(Integer isEffective) {
-        this.isEffective = isEffective;
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

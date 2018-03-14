@@ -1,22 +1,22 @@
 <template>
-  <div class="projectList">
+  <div class="projectInfo">
     <h1>{{ msg }}</h1>
     <ul id="example-1">
-      <li v-for = "item in items">
-        {{ item.projectName }}
+      <li @click="goProjectInfo(item)" v-for = "item in items">
+        {{ item.projectID }} ----- {{ item.projectName }} >>
       </li>
     </ul>
-    <button @click="getProjectList">登录</button>
+    <button @click="getProjectList">获取列表</button>
   </div>
 </template>
-
 <script>
 import $ from 'jquery'
+import router from './../../router'
 export default {
-  name: 'ProjectList',
+  name: 'ProjectInfo',
   data () {
     return {
-      msg: 'ProjectList',
+      msg: 'ProjectInfo',
       items: [
         { projectID: '1', projectName: 'Foo' },
         { projectID: '2', projectName: 'Bar' }
@@ -27,8 +27,14 @@ export default {
     this.getProjectList()
   },
   methods: {
+    // 打开项目详情页
+    goProjectInfo: function (item) {
+      router.push('/projectInfo/' + item.projectID)
+    },
     // 读取项目列表
     getProjectList: function () {
+      var _this = this
+      _this.msg = '获取列表中...'
       $.ajax({
         url: 'http://127.0.0.1:8088/project/list',
         type: 'get',
@@ -43,16 +49,8 @@ export default {
           var errorcode = data['errorcode']
           if (errorcode === '0') {
             var result = data['result']
-            var tmpList = []
-            for (var item in result) {
-              tmpList.push({'projectID': item['projectID'], 'projectName': item['projectName']})
-            }
-            this.msg = 'sfsfafasf'
-            this.items = tmpList
-            alert(this.msg)
-            // this.$set(this.msg, 'result')
-            // this.set(this.msg, 'result')
-            // this.$set(this, 'items', result)
+            _this.msg = '获取列表成功'
+            _this.items = result
           } else {
             var errormsg = data['errormsg']
             alert('错误: ' + errormsg)
@@ -68,14 +66,6 @@ export default {
 <style scoped>
 h1, h2 {
   font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
 }
 a {
   color: #42b983;

@@ -13,10 +13,8 @@ public class XfUser implements Serializable {
 
     private Date createDate;
 
-    private Integer isEffective;
-
     private String salt;//加密密码的盐
-    private byte state;//用户状态,0:创建未认证（比如没有激活，没有输入验证码等等）--等待验证的用户 , 1:正常状态,2：用户被锁定.
+    private Integer state;
 
     private List<XfRole> roleList;//权限列表
 
@@ -36,11 +34,11 @@ public class XfUser implements Serializable {
         this.salt = salt;
     }
 
-    public byte getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(byte state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
@@ -74,13 +72,5 @@ public class XfUser implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    public Integer getIsEffective() {
-        return isEffective;
-    }
-
-    public void setIsEffective(Integer isEffective) {
-        this.isEffective = isEffective;
     }
 }

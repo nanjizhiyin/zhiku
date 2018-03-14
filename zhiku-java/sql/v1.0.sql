@@ -46,7 +46,7 @@ CREATE TABLE `xf_user` (
   `nickname` varchar(20) DEFAULT NULL COMMENT '用户昵称',
   `email` varchar(128) DEFAULT NULL COMMENT '邮箱|登录帐号',
   `createDate`  datetime NOT NULL COMMENT '创建时间',
-  `isEffective` int(1) NOT NULL DEFAULT '1' COMMENT '是否有效1:有效 0:无效',
+  `state` int(3) NOT NULL DEFAULT '1' COMMENT '状态值1:有效 0:无效',
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='注册用户';
 
@@ -57,6 +57,33 @@ CREATE TABLE `zk_project` (
   `projectName` VARCHAR(256) NOT NULL COMMENT '项目名称',
   `createUserID`      bigint(32) NOT NULL COMMENT '创建者的ID',
   `createDate`  datetime NOT NULL COMMENT '创建时间',
-  `isEffective` int(1) NOT NULL DEFAULT '1' COMMENT '是否有效1:有效 0:无效',
+  `state` int(3) NOT NULL DEFAULT '1' COMMENT '状态值1:有效 0:无效',
   PRIMARY KEY (`projectID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='智库项目列表';
+
+# 数据表信息
+DROP TABLE IF EXISTS `zk_table`;
+CREATE TABLE `zk_table` (
+  `tableID`   bigint(32) NOT NULL AUTO_INCREMENT COMMENT '项目ID',
+  `projectID`   bigint(32) NOT NULL COMMENT '项目ID',
+  `field`   VARCHAR(256) NOT NULL COMMENT '字段',
+  `type`   VARCHAR(256) NOT NULL COMMENT '字段类型',
+  `createDate`  datetime NOT NULL COMMENT '创建时间',
+  `state` int(3) NOT NULL DEFAULT '1' COMMENT '状态值1:有效 0:无效',
+  PRIMARY KEY (`tableID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='数据表';
+
+# 数据表的字段
+DROP TABLE IF EXISTS `zk_table_field`;
+CREATE TABLE `zk_table_field` (
+  `fieldID`   bigint(32) NOT NULL AUTO_INCREMENT COMMENT '字段ID',
+  `tableID`   bigint(32) NOT NULL COMMENT '表ID',
+  `fieldName`   VARCHAR(256) NOT NULL COMMENT '字段',
+  `dataType`   VARCHAR(256) NOT NULL COMMENT '数据类型',
+  `length`   bigint(3) NOT NULL COMMENT '数据长度',
+  `p`   TINYINT(1) NOT NULL COMMENT 'primary key 主键',
+  `f`   TINYINT(1) NOT NULL COMMENT 'foreign key 外键',
+  `m`   TINYINT(1) NOT NULL COMMENT 'mandatory 非空',
+  `createDate`  datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`fieldID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='数据表的字段';
