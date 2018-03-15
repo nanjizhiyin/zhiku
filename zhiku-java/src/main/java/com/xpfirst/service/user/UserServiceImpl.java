@@ -1,6 +1,6 @@
 package com.xpfirst.service.user;
 
-import com.xpfirst.mapper.user.XfUserMapper;
+import com.xpfirst.dao.user.XfUserMapper;
 import com.xpfirst.model.XfUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

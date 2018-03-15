@@ -1,7 +1,6 @@
-package com.xpfirst.mapper.user;
+package com.xpfirst.dao.user;
 
 import com.xpfirst.model.XfUser;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 public interface XfUserMapper {

@@ -1,6 +1,6 @@
 package com.xpfirst.service.project;
 
-import com.xpfirst.mapper.project.ZkProjectMapper;
+import com.xpfirst.dao.project.ZkProjectMapper;
 import com.xpfirst.model.ZkProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

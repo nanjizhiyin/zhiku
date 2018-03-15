@@ -1,6 +1,5 @@
-package com.xpfirst.mapper.project;
+package com.xpfirst.dao.project;
 
-import com.xpfirst.model.XfUser;
 import com.xpfirst.model.ZkProject;
 import org.apache.ibatis.annotations.Param;
 

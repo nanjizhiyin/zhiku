@@ -1,8 +1,20 @@
 <template>
   <div class="projectList">
     <h1>{{ title }}</h1>
-    <h1>项目ID: {{ projectID }}</h1>
-    <h1>项目名称: {{ projectName }}</h1>
+    <h3>项目名称: {{ projectName }}</h3>
+    <div>数据表名称: <input type="text" id="tableName"/></div>
+    <h3>字段列表:</h3>
+    <div id="fieldList">
+      <button @click="addField()">添加字段</button>
+      <div id="field">
+        <span>字段:<input type="text" id="fieldName"/></span>
+        <span>数据类型:<input type="text" id="dataType"/></span>
+        <span>长度:<input type="text" id="length"/></span>
+        <span>主键:<input type="text" id="p"/></span>
+        <span>外键:<input type="text" id="f"/></span>
+        <span>非空:<input type="text" id="m"/></span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -22,6 +34,23 @@ export default {
     this.getProjectList()
   },
   methods: {
+    //  添加字段
+    addField: function () {
+      var tmpHtml = '<div id="field">'
+      tmpHtml += '<span>字段:<input type="text" id="fieldName"/></span>'
+      tmpHtml += '<span>数据类型:<input type="text" id="dataType"/></span>'
+      tmpHtml += '<span>长度:<input type="text" id="length"/></span>'
+      tmpHtml += '<span>主键:<input type="text" id="p"/></span>'
+      tmpHtml += '<span>外键:<input type="text" id="f"/></span>'
+      tmpHtml += '<span>非空:<input type="text" id="m"/></span>'
+      tmpHtml += '<button id="removeField">减少</button>'
+      tmpHtml += '</div>'
+      $('#fieldList').append(tmpHtml)
+      $('#removeField').unbind().click(function () {
+        // $(this).parent().remove()
+        $(this).parentNode.removeChild($(this))
+      })
+    },
     // 读取项目列表
     getProjectList: function () {
       var _this = this
