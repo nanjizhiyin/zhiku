@@ -1,7 +1,6 @@
 package com.xpfirst.controller;
 
-import com.xpfirst.config.SessionManager;
-import com.xpfirst.model.XfUser;
+import com.alibaba.fastjson.JSONObject;
 import com.xpfirst.model.ZkProject;
 import com.xpfirst.model.result.ResultBean;
 import com.xpfirst.model.result.ResultError;
@@ -10,9 +9,7 @@ import com.xpfirst.service.project.ZkProjectService;
 import com.xpfirst.service.user.UserService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -46,8 +43,7 @@ public class ProjectController {
     * @Return:
     */
     @RequestMapping(value = "list")
-    public ResultBean projectlist(HttpServletRequest request,
-                                  @RequestParam(required = true) Integer page,
+    public ResultBean projectlist(@RequestParam(required = true) Integer page,
                                   @RequestParam(required = true) Integer pageSize
                                   ) {
         try{
@@ -67,12 +63,24 @@ public class ProjectController {
     * @Param: projectID: 项目ID
     * @Return:
     */
-    @RequestMapping(value = "info")
-    public ResultBean projectinfo(@RequestParam(required = true) Long projectID) {
+    @RequestMapping(value = "{projectID}/info")
+    public ResultBean projectinfo(@PathVariable("projectID") Long projectID) {
         try{
             String userID = "111111";
             ZkProject zkProject = zkProjectService.selectInfoByProjectID(projectID);
             return new ResultSuccess(zkProject);
+        }
+        catch (Exception e){
+            log.info("====GJD==="+e.toString());
+            return new ResultError("xf-0001",e.toString());
+        }
+    }
+    @RequestMapping(value = "{projectID}/save" , method = RequestMethod.PUT)
+    public ResultBean save(@PathVariable("projectID") Long projectID) {
+        try{
+//            log.info("====GJD==="+jsonObject.toJSONString());
+            String userID = "111111";
+            return new ResultSuccess(userID);
         }
         catch (Exception e){
             log.info("====GJD==="+e.toString());

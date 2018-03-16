@@ -81,9 +81,9 @@ CREATE TABLE `zk_table_field` (
   `fieldName`   VARCHAR(256) NOT NULL COMMENT '字段',
   `dataType`   VARCHAR(256) NOT NULL COMMENT '数据类型',
   `length`   bigint(3) NOT NULL COMMENT '数据长度',
-  `p`   TINYINT(1) NOT NULL COMMENT 'primary key 主键',
-  `f`   TINYINT(1) NOT NULL COMMENT 'foreign key 外键',
-  `m`   TINYINT(1) NOT NULL COMMENT 'mandatory 非空',
+  `primary`   TINYINT(1) NOT NULL COMMENT 'primary key 主键',
+  `foreign`   TINYINT(1) NOT NULL COMMENT 'foreign key 外键',
+  `mandatory`   TINYINT(1) NOT NULL COMMENT 'mandatory 非空',
   `createDate`  datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`fieldID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='数据表的字段';
