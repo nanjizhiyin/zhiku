@@ -14,8 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @SpringBootApplication
 //启注解事务管理
-//@EnableTransactionManagement
-@MapperScan(basePackages= {"com.xpfirst.mapper"})
+@MapperScan(basePackages= {"com.xpfirst.dao"})
 public class App 
 {
     public static void main( String[] args )
