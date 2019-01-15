@@ -1,6 +1,5 @@
 package com.xpfirst.controller;
 
-import com.mysql.fabric.xmlrpc.base.Data;
 import com.xpfirst.model.XfUser;
 import com.xpfirst.model.result.ResultBean;
 import com.xpfirst.model.result.ResultError;

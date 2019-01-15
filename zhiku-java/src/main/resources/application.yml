@@ -13,9 +13,9 @@ spring:
   profiles: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/xpfirst?useUnicode=true&amp;characterEncoding=utf-8&allowMultiQueries=true
+    url: jdbc:mysql://127.0.0.1:3306/xpfirst?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
-    password: root
+    password: 5211314
 
 server:
   port: 8088

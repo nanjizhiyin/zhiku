@@ -1,11 +1,6 @@
-# vuedemo
-
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
+# 进行文件夹zhiku
+cd zhiku
+# 第一次运行失败时先执行以下命名
 npm install
 
 # serve with hot reload at localhost:8080

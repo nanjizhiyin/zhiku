@@ -1,6 +1,5 @@
 package com.xpfirst.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.xpfirst.model.ZkProject;
 import com.xpfirst.model.result.ResultBean;
 import com.xpfirst.model.result.ResultError;
@@ -78,7 +77,7 @@ public class ProjectController {
     @RequestMapping(value = "{projectID}/save" , method = RequestMethod.PUT)
     public ResultBean save(@PathVariable("projectID") Long projectID) {
         try{
-//            log.info("====GJD==="+jsonObject.toJSONString());
+            log.info("====projectID="+projectID);
             String userID = "111111";
             return new ResultSuccess(userID);
         }
