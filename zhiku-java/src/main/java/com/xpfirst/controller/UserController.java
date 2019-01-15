@@ -1,5 +1,6 @@
 package com.xpfirst.controller;
 
+import com.sun.deploy.net.HttpResponse;
 import com.xpfirst.model.XfUser;
 import com.xpfirst.model.result.ResultBean;
 import com.xpfirst.model.result.ResultError;
@@ -11,11 +12,16 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Copyright (C) 北京学信科技有限公司
@@ -74,7 +80,7 @@ public class UserController {
     */
     @RequestMapping(value = "login")
     public ResultBean login(@RequestParam(required = true) String username,
-                               @RequestParam(required = true) String password) {
+                            @RequestParam(required = true) String password) {
         try{
             if (username.length() == 0){
                 log.info("====GJD===用户名不能为空");
@@ -89,8 +95,16 @@ public class UserController {
                 UsernamePasswordToken token = new UsernamePasswordToken(username, password, captcha);
                 Subject currentUser = SecurityUtils.getSubject();
                 currentUser.login(token);
-                SecurityUtils.getSubject().login(token);
-                return new ResultSuccess(token.getUsername());
+                XfUser xfUser = userService.selectByUsername(username,1);
+                if (xfUser == null) {
+                    return new ResultError("xf-1001","认证失败");
+                }
+                // 返回数据
+                Map<String, Object> tmpMap = new HashMap<>(4);
+                tmpMap.put("userID",xfUser.getUserID());
+                tmpMap.put("username",xfUser.getUsername());
+                tmpMap.put("token",xfUser.getUserID());
+                return new ResultSuccess(tmpMap);
 
             } catch (AuthenticationException e){
                 log.info("====GJD===认证失败");

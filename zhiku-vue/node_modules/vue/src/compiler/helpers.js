@@ -18,10 +18,18 @@ export function pluckModuleFunction<F: Function> (
 
 export function addProp (el: ASTElement, name: string, value: string) {
   (el.props || (el.props = [])).push({ name, value })
+  el.plain = false
 }
 
-export function addAttr (el: ASTElement, name: string, value: string) {
+export function addAttr (el: ASTElement, name: string, value: any) {
   (el.attrs || (el.attrs = [])).push({ name, value })
+  el.plain = false
+}
+
+// add a raw attr (use this in preTransforms)
+export function addRawAttr (el: ASTElement, name: string, value: any) {
+  el.attrsMap[name] = value
+  el.attrsList.push({ name, value })
 }
 
 export function addDirective (
@@ -33,6 +41,7 @@ export function addDirective (
   modifiers: ?ASTModifiers
 ) {
   (el.directives || (el.directives = [])).push({ name, rawName, value, arg, modifiers })
+  el.plain = false
 }
 
 export function addHandler (
@@ -56,6 +65,18 @@ export function addHandler (
     )
   }
 
+  // normalize click.right and click.middle since they don't actually fire
+  // this is technically browser-specific, but at least for now browsers are
+  // the only target envs that have right/middle clicks.
+  if (name === 'click') {
+    if (modifiers.right) {
+      name = 'contextmenu'
+      delete modifiers.right
+    } else if (modifiers.middle) {
+      name = 'mouseup'
+    }
+  }
+
   // check capture modifier
   if (modifiers.capture) {
     delete modifiers.capture
@@ -71,18 +92,6 @@ export function addHandler (
     name = '&' + name // mark the event as passive
   }
 
-  // normalize click.right and click.middle since they don't actually fire
-  // this is technically browser-specific, but at least for now browsers are
-  // the only target envs that have right/middle clicks.
-  if (name === 'click') {
-    if (modifiers.right) {
-      name = 'contextmenu'
-      delete modifiers.right
-    } else if (modifiers.middle) {
-      name = 'mouseup'
-    }
-  }
-
   let events
   if (modifiers.native) {
     delete modifiers.native
@@ -91,7 +100,9 @@ export function addHandler (
     events = el.events || (el.events = {})
   }
 
-  const newHandler: any = { value }
+  const newHandler: any = {
+    value: value.trim()
+  }
   if (modifiers !== emptyObject) {
     newHandler.modifiers = modifiers
   }
@@ -105,6 +116,8 @@ export function addHandler (
   } else {
     events[name] = newHandler
   }
+
+  el.plain = false
 }
 
 export function getBindingAttr (
