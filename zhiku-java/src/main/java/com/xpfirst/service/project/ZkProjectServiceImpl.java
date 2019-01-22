@@ -29,7 +29,8 @@ public class ZkProjectServiceImpl implements ZkProjectService {
      * @Param: pageSize:每页的数量
      * @Return: 项目列表
      */
-    public List<ZkProject> selectListByCreateUserID(String createUserID,Integer stateIndex,Integer pageSize){
+    @Override
+    public List<ZkProject> selectListByCreateUserID(Long createUserID,Integer stateIndex,Integer pageSize){
         return zkProjectMapper.selectListByCreateUserID(createUserID,stateIndex,pageSize);
     }
 
@@ -40,6 +41,7 @@ public class ZkProjectServiceImpl implements ZkProjectService {
      * @Param: projectID: 项目ID
      * @Return: 项目资料
      */
+    @Override
     public ZkProject selectInfoByProjectID(Long projectID){
         return zkProjectMapper.selectInfoByProjectID(projectID);
     }

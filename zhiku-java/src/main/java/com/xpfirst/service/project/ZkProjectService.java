@@ -22,7 +22,7 @@ public interface ZkProjectService {
      * @Param: pageSize:每页的数量
      * @Return: 项目列表
      */
-    public List<ZkProject> selectListByCreateUserID(String createUserID,Integer stateIndex,Integer pageSize);
+    public List<ZkProject> selectListByCreateUserID(Long createUserID,Integer stateIndex,Integer pageSize);
 
     /**
      * @Author: Gaojindan

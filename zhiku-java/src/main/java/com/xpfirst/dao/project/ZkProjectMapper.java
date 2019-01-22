@@ -12,6 +12,7 @@ import java.util.List;
  * @Author: Gaojindan
  * @Create: 2018/3/2 下午1:19
  **/
+
 public interface ZkProjectMapper {
 
     /**
@@ -23,7 +24,7 @@ public interface ZkProjectMapper {
      * @Param: pageSize:每页的数量
     * @Return: 项目列表
     */
-    public List<ZkProject> selectListByCreateUserID(@Param("createUserID") String createUserID,
+    public List<ZkProject> selectListByCreateUserID(@Param("createUserID") Long createUserID,
                                              @Param("stateIndex") Integer stateIndex,
                                              @Param("pageSize") Integer pageSize);
 

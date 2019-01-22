@@ -1,9 +1,10 @@
 <template>
   <div class="projectInfo">
     <h1>{{ msg }}</h1>
+    <button @click="createProject()">添加项目</button>
     <ul id="example-1">
       <li @click="goProjectInfo(item)" v-for = "item in items">
-        {{ item.projectID }} ----- {{ item.projectName }} >>
+        <todo v-bind:todo="todo">{{ item.projectID }} ----- {{ item.projectName }} >></todo>
       </li>
     </ul>
     <button @click="getProjectList">获取列表</button>
@@ -11,6 +12,7 @@
 </template>
 <script>
 import $ from 'jquery'
+import Cookies from 'js-cookie'
 import router from './../../router'
 export default {
   name: 'ProjectInfo',
@@ -18,8 +20,8 @@ export default {
     return {
       msg: 'ProjectInfo',
       items: [
-        { projectID: '1', projectName: 'Foo' },
-        { projectID: '2', projectName: 'Bar' }
+        { projectID: '1', projectName: '测试1' },
+        { projectID: '2', projectName: '测试2' }
       ]
     }
   },
@@ -27,6 +29,10 @@ export default {
     this.getProjectList()
   },
   methods: {
+    // 创建项目
+    createProject: function () {
+      router.push('/projectCreate/')
+    },
     // 打开项目详情页
     goProjectInfo: function (item) {
       router.push('/projectInfo/' + item.projectID)
@@ -40,7 +46,7 @@ export default {
         type: 'get',
         dataType: 'json',
         async: false, // 默认为true 异步
-        data: 'page=' + 1 + '&pageSize=' + 11,
+        data: 'page=' + 1 + '&pageSize=' + 11 + '&userID=' + Cookies.get('token'),
         error: function (e) {
           alert('出错了:' + e)
         },

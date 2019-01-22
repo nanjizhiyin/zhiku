@@ -17,6 +17,7 @@
 
 <script>
 import $ from 'jquery'
+import Cookies from 'js-cookie'
 import router from './../../router'
 export default {
   name: 'Login',
@@ -55,16 +56,7 @@ export default {
           if (errorcode === '0') {
             console.log('登录成功')
             var token = data.result.token
-            let expireDays = 1000 * 60 * 60
-            this.setCookie('token', token, expireDays)
-            
-            var d = new Date()
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
-            var expires = "expires=" + d.toUTCString()
-            console.info(cname + "=" + cvalue + "; " + expires)
-            document.cookie = cname + "=" + cvalue + "; " + expires
-            console.info(document.cookie)
-
+            Cookies.set('token', token, { expires: 7, path: '' })
             router.push('/projectlist')
           } else {
             var errormsg = data['errormsg']

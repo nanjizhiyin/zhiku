@@ -43,10 +43,10 @@ public class ProjectController {
     */
     @RequestMapping(value = "list")
     public ResultBean projectlist(@RequestParam(required = true) Integer page,
-                                  @RequestParam(required = true) Integer pageSize
+                                  @RequestParam(required = true) Integer pageSize,
+                                  @RequestParam(required = true) Long userID
                                   ) {
         try{
-            String userID = "111111";
             List<ZkProject> tmpList = zkProjectService.selectListByCreateUserID(userID,(page - 1)*pageSize,pageSize);
             return new ResultSuccess(tmpList);
         }
