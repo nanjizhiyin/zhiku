@@ -12,7 +12,7 @@ import com.xpfirst.model.result.ResultSuccess;
 public class BasicService {
 
     protected ResultError createError(ErrorCode exceptionCode){
-        return new ResultError(exceptionCode.getCode(),exceptionCode.getErrorMsg());
+        return new ResultError(exceptionCode.getCode(),exceptionCode.getMsg());
     }
 
     protected ResultSuccess createSuccess(Object obj) {

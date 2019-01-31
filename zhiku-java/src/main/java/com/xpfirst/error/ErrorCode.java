@@ -8,6 +8,7 @@ package com.xpfirst.error;
 public enum ErrorCode {
 
     error("0","系统正常"),
+    error0001("0001","系统错误"),
     error1001("1001","用户名已经存在"),
     error1002("1002","用户名不能为空"),
     error1003("1003","密码不能为空"),
@@ -30,11 +31,11 @@ public enum ErrorCode {
         this.code = code;
     }
 
-    public String getErrorMsg() {
+    public String getMsg() {
         return msg;
     }
 
-    public void setErrorMsg(String errorMsg) {
+    public void setMsg(String msg) {
         this.msg = msg;
     }
 }

@@ -52,14 +52,14 @@ export default {
         },
         success: function (data) {
           // 处理反馈结果
-          var errorcode = data['errorcode']
+          var errorcode = data['code']
           if (errorcode === '0') {
             console.log('登录成功')
             var token = data.result.token
             Cookies.set('token', token, { expires: 7, path: '' })
             router.push('/projectlist')
           } else {
-            var errormsg = data['errormsg']
+            var errormsg = data['msg']
             alert('错误: ' + errormsg)
           }
         }
