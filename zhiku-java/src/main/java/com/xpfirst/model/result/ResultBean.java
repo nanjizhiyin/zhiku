@@ -9,31 +9,40 @@ package com.xpfirst.model.result;
  **/
 public class ResultBean {
 
-    private String errorcode;//错误代码 0:没有错误
-    private String errormsg;//错误信息
-    private Object result;//返回的数据
+    //错误代码 0:没有错误
+    private String code;
+    //错误信息
+    private String msg;
+    //返回的数据
+    private Object data;
 
-    public String getErrorcode() {
-        return errorcode;
+    public String getCode() {
+        return code;
     }
 
-    public void setErrorcode(String errorcode) {
-        this.errorcode = errorcode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getErrormsg() {
-        return errormsg;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setErrormsg(String errormsg) {
-        this.errormsg = errormsg;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public Object getResult() {
-        return result;
+    public Object getData() {
+        return data;
     }
 
-    public void setResult(Object result) {
-        this.result = result;
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString(){
+        String tmpStr = "code = " + code + ",msg = "+msg + ",data = " + String.valueOf(data);
+        return tmpStr;
     }
 }

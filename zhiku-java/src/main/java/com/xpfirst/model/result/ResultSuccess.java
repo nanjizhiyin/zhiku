@@ -9,7 +9,9 @@ package com.xpfirst.model.result;
  **/
 public class ResultSuccess extends ResultBean {
     public ResultSuccess(Object obj){
-        this.setErrorcode("0");
-        this.setResult(obj);
+        this.setCode("0");
+        this.setMsg("系统正常");
+        this.setData(obj);
+        System.out.print(this.toString());
     }
 }

@@ -1,6 +1,7 @@
 package com.xpfirst.service.user;
 
 import com.xpfirst.model.User;
+import com.xpfirst.model.result.ResultBean;
 
 /**
  * Copyright (C) 北京学信科技有限公司
@@ -18,7 +19,7 @@ public interface UserService {
     * @Param: 用户资料
     * @Return:
     */
-    public void registerUser(User user);
+    public ResultBean register(String username, String password) throws Exception;
 
     /**
      * @Author: Gaojindan
@@ -38,5 +39,5 @@ public interface UserService {
      * @Return: password:密码
      * @Return: 用户基础资料
      */
-    public User selectByUsernameAndPassword(String username, String password);
+    public ResultBean login(String username, String password);
 }

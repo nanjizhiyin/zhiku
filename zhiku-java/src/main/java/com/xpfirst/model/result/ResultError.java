@@ -8,8 +8,9 @@ package com.xpfirst.model.result;
  * @Create: 2018/2/28 下午2:54
  **/
 public class ResultError extends ResultBean {
-    public ResultError(String errorcode, String errormsg){
-        this.setErrorcode(errorcode);
-        this.setErrormsg(errormsg);
+    public ResultError(String code, String msg){
+        this.setCode(code);
+        this.setMsg(msg);
+        System.out.print("返回结果:" + this.toString());
     }
 }
