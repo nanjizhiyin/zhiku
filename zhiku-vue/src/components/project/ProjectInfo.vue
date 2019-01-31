@@ -1,5 +1,5 @@
 <template>
-  <div class="projectList">
+  <div class="projectInfo">
     <h1>{{ title }}</h1>
     <h3>项目名称: {{ projectName }}</h3>
     <div>数据表名称: <input type="text" id="tableName"/></div>

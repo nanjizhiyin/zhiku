@@ -1,7 +1,7 @@
 package com.xpfirst.service.project;
 
-import com.xpfirst.dao.project.ZkProjectMapper;
-import com.xpfirst.model.ZkProject;
+import com.xpfirst.dao.project.ProjectMapper;
+import com.xpfirst.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +16,10 @@ import java.util.List;
  **/
 
 @Service
-public class ZkProjectServiceImpl implements ZkProjectService {
+public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
-    private ZkProjectMapper zkProjectMapper;
+    private ProjectMapper zkProjectMapper;
     /**
      * @Author: Gaojindan
      * @Create: 2018/3/2 下午2:23
@@ -30,7 +30,7 @@ public class ZkProjectServiceImpl implements ZkProjectService {
      * @Return: 项目列表
      */
     @Override
-    public List<ZkProject> selectListByCreateUserID(Long createUserID,Integer stateIndex,Integer pageSize){
+    public List<Project> selectListByCreateUserID(Long createUserID, Integer stateIndex, Integer pageSize){
         return zkProjectMapper.selectListByCreateUserID(createUserID,stateIndex,pageSize);
     }
 
@@ -42,7 +42,7 @@ public class ZkProjectServiceImpl implements ZkProjectService {
      * @Return: 项目资料
      */
     @Override
-    public ZkProject selectInfoByProjectID(Long projectID){
+    public Project selectInfoByProjectID(Long projectID){
         return zkProjectMapper.selectInfoByProjectID(projectID);
     }
 }

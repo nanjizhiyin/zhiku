@@ -10,11 +10,11 @@ import java.util.List;
  * @Author: Gaojindan
  * @Create: 2018/3/7 上午10:03
  **/
-public class XfRole implements Serializable {
+public class Role implements Serializable {
     private Long roleID;
     private String rolename;//角色名称
     private String type;//角色类型
-    private List<XfPermission> permissionList;//权限列表
+    private List<Permission> permissionList;//权限列表
 
     public Long getRoleID() {
         return roleID;
@@ -40,11 +40,11 @@ public class XfRole implements Serializable {
         this.type = type;
     }
 
-    public List<XfPermission> getPermissionList() {
+    public List<Permission> getPermissionList() {
         return permissionList;
     }
 
-    public void setPermissionList(List<XfPermission> permissionList) {
+    public void setPermissionList(List<Permission> permissionList) {
         this.permissionList = permissionList;
     }
 

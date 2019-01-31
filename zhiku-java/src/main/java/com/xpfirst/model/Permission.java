@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Author: Gaojindan
  * @Create: 2018/3/7 上午10:00
  **/
-public class XfPermission implements Serializable {
+public class Permission implements Serializable {
     private Long permissionID;
     private String url;//url地址
     private String des;//url描述

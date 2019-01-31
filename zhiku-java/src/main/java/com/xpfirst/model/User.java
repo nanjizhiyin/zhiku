@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class XfUser implements Serializable {
+public class User implements Serializable {
     private Long userID;
 
     private String username;
@@ -16,13 +16,13 @@ public class XfUser implements Serializable {
     private String salt;//加密密码的盐
     private Integer state;
 
-    private List<XfRole> roleList;//权限列表
+    private List<Role> roleList;//权限列表
 
-    public List<XfRole> getRoleList() {
+    public List<Role> getRoleList() {
         return roleList;
     }
 
-    public void setRoleList(List<XfRole> roleList) {
+    public void setRoleList(List<Role> roleList) {
         this.roleList = roleList;
     }
 

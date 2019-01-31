@@ -1,6 +1,6 @@
 package com.xpfirst.dao.project;
 
-import com.xpfirst.model.ZkProject;
+import com.xpfirst.model.Project;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @Create: 2018/3/2 下午1:19
  **/
 
-public interface ZkProjectMapper {
+public interface ProjectMapper {
 
     /**
     * @Author: Gaojindan
@@ -24,9 +24,9 @@ public interface ZkProjectMapper {
      * @Param: pageSize:每页的数量
     * @Return: 项目列表
     */
-    public List<ZkProject> selectListByCreateUserID(@Param("createUserID") Long createUserID,
-                                             @Param("stateIndex") Integer stateIndex,
-                                             @Param("pageSize") Integer pageSize);
+    public List<Project> selectListByCreateUserID(@Param("createUserID") Long createUserID,
+                                                  @Param("stateIndex") Integer stateIndex,
+                                                  @Param("pageSize") Integer pageSize);
 
     /**
      * @Author: Gaojindan
@@ -35,5 +35,5 @@ public interface ZkProjectMapper {
      * @Param: projectID: 项目ID
      * @Return: 项目资料
      */
-    public ZkProject selectInfoByProjectID(@Param("projectID") Long projectID);
+    public Project selectInfoByProjectID(@Param("projectID") Long projectID);
 }

@@ -1,7 +1,6 @@
 package com.xpfirst.controller;
 
-import com.sun.deploy.net.HttpResponse;
-import com.xpfirst.model.XfUser;
+import com.xpfirst.model.User;
 import com.xpfirst.model.result.ResultBean;
 import com.xpfirst.model.result.ResultError;
 import com.xpfirst.model.result.ResultSuccess;
@@ -12,13 +11,10 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,12 +48,12 @@ public class UserController {
                 log.info("====GJD===密码不能为空");
                 return new ResultError("xf-1003","密码不能为空");
             }
-            XfUser tmpUser = userService.selectByUsername(username,null);
+            User tmpUser = userService.selectByUsername(username,null);
             if (tmpUser != null){
                 log.info("====GJD===用户名已经存在");
                 return new ResultError("xf-1001","用户名已经存在");
             }
-            XfUser user = new XfUser();
+            User user = new User();
             Date nowDate = new Date();
             user.setUsername(username);
             user.setPassword(password);
@@ -95,15 +91,15 @@ public class UserController {
                 UsernamePasswordToken token = new UsernamePasswordToken(username, password, captcha);
                 Subject currentUser = SecurityUtils.getSubject();
                 currentUser.login(token);
-                XfUser xfUser = userService.selectByUsername(username,1);
-                if (xfUser == null) {
+                User user = userService.selectByUsername(username,1);
+                if (user == null) {
                     return new ResultError("xf-1001","认证失败");
                 }
                 // 返回数据
                 Map<String, Object> tmpMap = new HashMap<>(4);
-                tmpMap.put("userID",xfUser.getUserID());
-                tmpMap.put("username",xfUser.getUsername());
-                tmpMap.put("token",xfUser.getUserID());
+                tmpMap.put("userID", user.getUserID());
+                tmpMap.put("username", user.getUsername());
+                tmpMap.put("token", user.getUserID());
                 return new ResultSuccess(tmpMap);
 
             } catch (AuthenticationException e){

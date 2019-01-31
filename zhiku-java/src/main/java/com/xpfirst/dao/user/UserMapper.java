@@ -1,20 +1,20 @@
 package com.xpfirst.dao.user;
 
-import com.xpfirst.model.XfUser;
+import com.xpfirst.model.User;
 import org.apache.ibatis.annotations.Param;
 
-public interface XfUserMapper {
+public interface UserMapper {
     int deleteByPrimaryKey(Long userID);
 
-    int insert(XfUser record);
+    int insert(User record);
 
-    int insertSelective(XfUser record);
+    int insertSelective(User record);
 
-    XfUser selectByPrimaryKey(Long userID);
+    User selectByPrimaryKey(Long userID);
 
-    int updateByPrimaryKeySelective(XfUser record);
+    int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(XfUser record);
+    int updateByPrimaryKey(User record);
 
     /**
      * @Author: Gaojindan
@@ -24,7 +24,7 @@ public interface XfUserMapper {
      * @Return: state:有效状态
      * @Return: 用户基础资料
      */
-    XfUser selectByUsername(@Param("username") String username, @Param("state") Integer state);
+    User selectByUsername(@Param("username") String username, @Param("state") Integer state);
 
     /**
     * @Author: Gaojindan
@@ -34,5 +34,5 @@ public interface XfUserMapper {
      * @Return: password:密码
     * @Return: 用户基础资料
     */
-    XfUser selectByUsernameAndPassword(@Param("username") String username,@Param("password") String password);
+    User selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }

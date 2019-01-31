@@ -1,19 +1,14 @@
 package com.xpfirst.config;
 
-import com.xpfirst.model.XfPermission;
-import com.xpfirst.model.XfRole;
-import com.xpfirst.model.XfUser;
+import com.xpfirst.model.Permission;
+import com.xpfirst.model.Role;
+import com.xpfirst.model.User;
 import com.xpfirst.service.user.UserService;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.session.InvalidSessionException;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.ByteSource;
 
 import javax.annotation.Resource;
 
@@ -37,7 +32,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         //实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的
         //获取用户的输入的账号.
         String username = (String) token.getPrincipal();
-        XfUser userInfo = userService.selectByUsername(username,null);
+        User userInfo = userService.selectByUsername(username,null);
         if (userInfo == null) {
             throw new AuthenticationException("不存在");
         }
@@ -57,10 +52,10 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 //        System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        XfUser userInfo = (XfUser) principals.getPrimaryPrincipal();
-        for (XfRole role : userInfo.getRoleList()) {
+        User userInfo = (User) principals.getPrimaryPrincipal();
+        for (Role role : userInfo.getRoleList()) {
             authorizationInfo.addRole(role.getRolename());
-            for (XfPermission p : role.getPermissionList()) {
+            for (Permission p : role.getPermissionList()) {
                 authorizationInfo.addStringPermission(p.getUrl());
             }
         }

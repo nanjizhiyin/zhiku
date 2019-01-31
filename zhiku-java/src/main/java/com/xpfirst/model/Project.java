@@ -10,7 +10,7 @@ import java.util.Date;
  * @Author: Gaojindan
  * @Create: 2018/3/2 下午1:24
  **/
-public class ZkProject implements Serializable {
+public class Project implements Serializable {
     private Long projectID; //项目名称
     private String projectName; //创建者的ID
     private Integer createUserID; //创建者的ID

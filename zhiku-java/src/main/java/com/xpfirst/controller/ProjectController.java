@@ -1,17 +1,15 @@
 package com.xpfirst.controller;
 
-import com.xpfirst.model.ZkProject;
+import com.xpfirst.model.Project;
 import com.xpfirst.model.result.ResultBean;
 import com.xpfirst.model.result.ResultError;
 import com.xpfirst.model.result.ResultSuccess;
-import com.xpfirst.service.project.ZkProjectService;
+import com.xpfirst.service.project.ProjectService;
 import com.xpfirst.service.user.UserService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +29,7 @@ public class ProjectController {
     @Autowired
     private UserService userService;
     @Autowired
-    private ZkProjectService zkProjectService;
+    private ProjectService zkProjectService;
 
     /**
     * @Author: Gaojindan
@@ -47,7 +45,7 @@ public class ProjectController {
                                   @RequestParam(required = true) Long userID
                                   ) {
         try{
-            List<ZkProject> tmpList = zkProjectService.selectListByCreateUserID(userID,(page - 1)*pageSize,pageSize);
+            List<Project> tmpList = zkProjectService.selectListByCreateUserID(userID,(page - 1)*pageSize,pageSize);
             return new ResultSuccess(tmpList);
         }
         catch (Exception e){
@@ -66,7 +64,7 @@ public class ProjectController {
     public ResultBean projectinfo(@PathVariable("projectID") Long projectID) {
         try{
             String userID = "111111";
-            ZkProject zkProject = zkProjectService.selectInfoByProjectID(projectID);
+            Project zkProject = zkProjectService.selectInfoByProjectID(projectID);
             return new ResultSuccess(zkProject);
         }
         catch (Exception e){

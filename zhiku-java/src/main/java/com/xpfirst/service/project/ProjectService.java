@@ -1,6 +1,6 @@
 package com.xpfirst.service.project;
 
-import com.xpfirst.model.ZkProject;
+import com.xpfirst.model.Project;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @Author: Gaojindan
  * @Create: 2018/3/2 下午2:32
  **/
-public interface ZkProjectService {
+public interface ProjectService {
 
     /**
      * @Author: Gaojindan
@@ -22,7 +22,7 @@ public interface ZkProjectService {
      * @Param: pageSize:每页的数量
      * @Return: 项目列表
      */
-    public List<ZkProject> selectListByCreateUserID(Long createUserID,Integer stateIndex,Integer pageSize);
+    public List<Project> selectListByCreateUserID(Long createUserID, Integer stateIndex, Integer pageSize);
 
     /**
      * @Author: Gaojindan
@@ -31,5 +31,5 @@ public interface ZkProjectService {
      * @Param: projectID: 项目ID
      * @Return: 项目资料
      */
-    public ZkProject selectInfoByProjectID(Long projectID);
+    public Project selectInfoByProjectID(Long projectID);
 }

@@ -1,6 +1,6 @@
 package com.xpfirst.service.user;
 
-import com.xpfirst.model.XfUser;
+import com.xpfirst.model.User;
 
 /**
  * Copyright (C) 北京学信科技有限公司
@@ -18,7 +18,7 @@ public interface UserService {
     * @Param: 用户资料
     * @Return:
     */
-    public void registerUser(XfUser user);
+    public void registerUser(User user);
 
     /**
      * @Author: Gaojindan
@@ -28,7 +28,7 @@ public interface UserService {
      * @Return: state:有效状态
      * @Return: 用户基础资料
      */
-    public XfUser selectByUsername(String username,Integer state);
+    public User selectByUsername(String username, Integer state);
 
     /**
      * @Author: Gaojindan
@@ -38,5 +38,5 @@ public interface UserService {
      * @Return: password:密码
      * @Return: 用户基础资料
      */
-    public XfUser selectByUsernameAndPassword(String username,String password);
+    public User selectByUsernameAndPassword(String username, String password);
 }

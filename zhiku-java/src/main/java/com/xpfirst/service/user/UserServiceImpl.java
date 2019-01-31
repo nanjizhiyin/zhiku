@@ -1,7 +1,7 @@
 package com.xpfirst.service.user;
 
-import com.xpfirst.dao.user.XfUserMapper;
-import com.xpfirst.model.XfUser;
+import com.xpfirst.dao.user.UserMapper;
+import com.xpfirst.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
 
     @Autowired
-    private XfUserMapper xfUserMapper;
+    private UserMapper userMapper;
 
     /**
      * @Author: Gaojindan
@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService{
      * @Return:
      */
     @Override
-    public void registerUser(XfUser user){
-        xfUserMapper.insertSelective(user);
+    public void registerUser(User user){
+        userMapper.insertSelective(user);
     }
 
     /**
@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService{
      * @Return: 用户基础资料
      */
     @Override
-    public XfUser selectByUsername(String username,Integer state){
-        return xfUserMapper.selectByUsername(username,state);
+    public User selectByUsername(String username, Integer state){
+        return userMapper.selectByUsername(username,state);
     }
 
     /**
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
      * @Return: 用户基础资料
      */
     @Override
-    public XfUser selectByUsernameAndPassword(String username,String password){
-        return xfUserMapper.selectByUsernameAndPassword(username,password);
+    public User selectByUsernameAndPassword(String username, String password){
+        return userMapper.selectByUsernameAndPassword(username,password);
     }
 }
